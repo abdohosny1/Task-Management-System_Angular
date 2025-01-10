@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-4 col-sm-8 col-10 shadow-lg p-5 rounded bg-light">
+    <main class="form-signin w-100 m-auto text-center">
+      <form [formGroup]="loginForm" #form="ngForm" (ngSubmit)="validate()">
+        <h1 class="h3 mb-4 fw-normal text-primary">Please Sign In</h1>
+
+        <!-- Email Input -->
+        <div class="form-group mb-3">
+          <app-text-input
+            formControlName="email"
+            [lable]="'Email Address'"
+            [type]="'email'">
+          </app-text-input>
+        </div>
+
+        <!-- Password Input -->
+        <div class="form-group mb-4">
+          <app-text-input
+            formControlName="password"
+            [lable]="'Password'"
+            [type]="'password'">
+          </app-text-input>
+        </div>
+
+
+
+        <!-- Submit Button -->
+        <button
+          class="w-100 btn btn-lg btn-primary"
+          type="submit"
+          [disabled]="!loginForm.valid">
+          Sign In
+        </button>
+
+        <p class="text-muted">Don’t have an account? <a href="#" class="text-primary">Sign up</a></p>
+
+      </form>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="form-group">
+  <input
+    [ngClass]="controlDir && controlDir.control && controlDir.control.touched
+      ? !controlDir.control.valid
+        ? 'is-invalid'
+        : 'is-valid'
+      : null!"
+    [type]="type"
+    (input)="onChange($event) "
+    (blur)="onTouched()"
+    class="form-control my-2"
+    id="{{ lable }}"
+    #input
+    placeholder="{{ lable }}"
+    required
+    [class.is-invalid]="controlDir.invalid && controlDir.touched"
+  />
+
+  <!-- Spinner for pending state -->
+  <div
+    *ngIf="controlDir && controlDir.control && controlDir.control.status === 'PENDING'"
+    class="fa fa-spinner fa-spin loader"
+  ></div>
+
+  <!-- Validation Messages -->
+  <div
+    *ngIf="controlDir.control?.invalid && (controlDir.control?.dirty || controlDir.control?.touched)"
+    class="invalid-feedback"
+  >
+    <small class="text-danger" *ngIf="controlDir.control?.errors?.['required']">
+      {{ lable }} is required
+    </small>
+    <small class="text-danger" *ngIf="controlDir.control?.errors?.['pattern']">
+      {{ lable }} is not valid
+    </small>
+  </div>
+
+  <!-- Custom Error Messages -->
+  <div
+    class="invalid-feedback d-block"
+    *ngIf="controlDir.control?.invalid && (controlDir.control?.dirty || controlDir.control?.touched)"
+  >
+    <small class="text-danger" *ngIf="controlDir.control?.errors?.['emailExists']">
+      Email Address is in use
+    </small>
+  </div>
+</div>

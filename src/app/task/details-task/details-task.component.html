@@ -1,0 +1,27 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4 w-50">
+    <h4 class="text-center mb-3">Task Details</h4>
+    <hr />
+    <dl class="row">
+      <dt class="col-sm-4">ID:</dt>
+      <dd class="col-sm-8">{{ oneTask.id }}</dd>
+
+      <dt class="col-sm-4">Title:</dt>
+      <dd class="col-sm-8">{{ oneTask.title }}</dd>
+
+      <dt class="col-sm-4">Description:</dt>
+      <dd class="col-sm-8">{{ oneTask.description }}</dd>
+
+      <dt class="col-sm-4">Status:</dt>
+      <dd class="col-sm-8">
+        <span [ngClass]="getStatusBadge(oneTask.status)">{{ oneTask.status }}</span>
+      </dd>
+
+      <dt class="col-sm-4">Due Date:</dt>
+      <dd class="col-sm-8">{{ oneTask.dueDate | date: 'shortDate' }}</dd>
+    </dl>
+    <div class="text-center mt-4">
+      <button (click)="BackToTask()" class="btn btn-info">Back to List</button>
+    </div>
+  </div>
+</div>
