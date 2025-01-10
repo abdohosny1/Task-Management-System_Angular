@@ -18,13 +18,22 @@ this.loadCurentUser();
 
   }
 
-  loadCurentUser(){
+  loadCurentUser() {
+    const token = localStorage?.getItem("token") || '';
 
-    const token =localStorage?.getItem("token") || ''  ;
-      if(!token) return;
+    if (!token) return;
 
-      const user:IUser=JSON.parse(token);
+    // Decode the token and extract user info
+    const decodedToken = this.accountService.getDecodedToken(token);
+
+    if (decodedToken) {
+      const user: IUser = {
+        token,
+        name: decodedToken?.name, // or whichever field is relevant
+        email: decodedToken?.email
+      };
+
       this.accountService.setCurrentUser(user);
-
-  }
+    }
+}
 }

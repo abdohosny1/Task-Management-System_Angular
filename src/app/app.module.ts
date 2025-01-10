@@ -1,3 +1,4 @@
+import { ServerErrorComponent } from './SHARED/COMPONENTS/server-error/server-error.component';
 import { TaskComponent } from './task/task/task.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,12 +12,19 @@ import { TextInputComponent } from './SHARED/COMPONENTS/text-input/text-input.co
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AddEditTaskComponent } from './task/add-edit-task/add-edit-task.component';
 import { NotFoundComponent } from './SHARED/COMPONENTS/not-found/not-found.component';
 import { DetailsTaskComponent } from './task/details-task/details-task.component';
 import { JWTInterceptor } from './Interceptor/JWTInterceptor';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
+import { LoadingInterceptor } from './Interceptor/LoadingInterceptor';
+import { ErrorInterceptor } from './Interceptor/ErrorInterceptor';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +35,9 @@ import { JWTInterceptor } from './Interceptor/JWTInterceptor';
     TaskComponent,
     AddEditTaskComponent,
     NotFoundComponent,
-    DetailsTaskComponent
+    DetailsTaskComponent,
+    HomeComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +49,18 @@ import { JWTInterceptor } from './Interceptor/JWTInterceptor';
     NgbModalModule,
     NgbModule,
     FormsModule,
+    NgbDropdownModule,
+    BrowserAnimationsModule,
     ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
+
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:JWTInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+   // {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
+
+
 
   ],
   bootstrap: [AppComponent]
